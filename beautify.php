@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['error' => 'Invalid request method']);
 }
 
-function beautifyCode($code) {
+function beautifyCode($code)
+{
     $lines = explode("\n", $code);
     $beautified = '';
     $indentLevel = 0;
@@ -28,10 +29,14 @@ function beautifyCode($code) {
 
     foreach ($lines as $line) {
         $trimmedLine = trim($line);
-        if (preg_match('/<style/i', $trimmedLine)) $inStyle = true;
-        if (preg_match('/<\/style>/i', $trimmedLine)) $inStyle = false;
-        if (preg_match('/<script/i', $trimmedLine)) $inScript = true;
-        if (preg_match('/<\/script>/i', $trimmedLine)) $inScript = false;
+        if (preg_match('/<style/i', $trimmedLine))
+            $inStyle = true;
+        if (preg_match('/<\/style>/i', $trimmedLine))
+            $inStyle = false;
+        if (preg_match('/<script/i', $trimmedLine))
+            $inScript = true;
+        if (preg_match('/<\/script>/i', $trimmedLine))
+            $inScript = false;
 
         if (!$inStyle && !$inScript) {
             if (preg_match('/<\/[^>]+>/', $trimmedLine)) {
@@ -41,8 +46,7 @@ function beautifyCode($code) {
             if (preg_match('/<[^\/][^>]*[^\/]>/', $trimmedLine) && !preg_match('/<(input|img|br|hr|meta|link)/i', $trimmedLine)) {
                 $indentLevel++;
             }
-        }
-        elseif ($inStyle) {
+        } elseif ($inStyle) {
             if (preg_match('/}/', $trimmedLine)) {
                 $indentLevel = max(0, $indentLevel - 1);
             }
@@ -50,8 +54,7 @@ function beautifyCode($code) {
             if (preg_match('/{/', $trimmedLine)) {
                 $indentLevel++;
             }
-        }
-        elseif ($inScript) {
+        } elseif ($inScript) {
             if (preg_match('/[)}]/', $trimmedLine)) {
                 $indentLevel = max(0, $indentLevel - 1);
             }
