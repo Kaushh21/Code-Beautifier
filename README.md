@@ -45,10 +45,6 @@ This JavaScript file handles the frontend operations, including sending AJAX req
 6. Copy the beautified code using the "Copy Code" button.
 7. Clear the fields if needed using the "Clear Result" button.
 
-## Dependencies
-
-- [Bootstrap 5.3.0](https://getbootstrap.com/) for styling and responsiveness.
-
 ## Acknowledgements
 
 - [Bootstrap](https://getbootstrap.com/) for frontend styling.
